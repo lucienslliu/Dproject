@@ -2,6 +2,8 @@
 
 #include "stdlogic.h"
 
+extern "C" _declspec(dllexport) int Test();
+
 class FSGameObject
 {
 public:

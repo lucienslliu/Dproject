@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameLogic", "GameLogic.vcproj", "{D58F0C7D-057C-44D9-99D1-B1E107636328}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DGame", "DGame.vcproj", "{8FD86C45-93C1-4D7A-92E2-423BF7EEC530}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D58F0C7D-057C-44D9-99D1-B1E107636328} = {D58F0C7D-057C-44D9-99D1-B1E107636328}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +18,10 @@ Global
 		{D58F0C7D-057C-44D9-99D1-B1E107636328}.Debug|Win32.Build.0 = Debug|Win32
 		{D58F0C7D-057C-44D9-99D1-B1E107636328}.Release|Win32.ActiveCfg = Release|Win32
 		{D58F0C7D-057C-44D9-99D1-B1E107636328}.Release|Win32.Build.0 = Release|Win32
+		{8FD86C45-93C1-4D7A-92E2-423BF7EEC530}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8FD86C45-93C1-4D7A-92E2-423BF7EEC530}.Debug|Win32.Build.0 = Debug|Win32
+		{8FD86C45-93C1-4D7A-92E2-423BF7EEC530}.Release|Win32.ActiveCfg = Release|Win32
+		{8FD86C45-93C1-4D7A-92E2-423BF7EEC530}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
