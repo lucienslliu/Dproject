@@ -8,6 +8,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DGame", "DGame.vcproj", "{8
 		{D58F0C7D-057C-44D9-99D1-B1E107636328} = {D58F0C7D-057C-44D9-99D1-B1E107636328}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Common.vcproj", "{60B876B4-F2F1-4148-8D97-68B03AA041AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -22,6 +24,10 @@ Global
 		{8FD86C45-93C1-4D7A-92E2-423BF7EEC530}.Debug|Win32.Build.0 = Debug|Win32
 		{8FD86C45-93C1-4D7A-92E2-423BF7EEC530}.Release|Win32.ActiveCfg = Release|Win32
 		{8FD86C45-93C1-4D7A-92E2-423BF7EEC530}.Release|Win32.Build.0 = Release|Win32
+		{60B876B4-F2F1-4148-8D97-68B03AA041AF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{60B876B4-F2F1-4148-8D97-68B03AA041AF}.Debug|Win32.Build.0 = Debug|Win32
+		{60B876B4-F2F1-4148-8D97-68B03AA041AF}.Release|Win32.ActiveCfg = Release|Win32
+		{60B876B4-F2F1-4148-8D97-68B03AA041AF}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
