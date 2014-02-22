@@ -190,10 +190,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\src\GameLogic\fsmessage.h"
-				>
-			</File>
-			<File
 				RelativePath="..\src\GameLogic\stdlogic.cpp"
 				>
 				<FileConfiguration
@@ -283,6 +279,50 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="Message"
+			>
+			<File
+				RelativePath="..\src\gamelogic\dispatcher.cc"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\dispatcher.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\GameLogic\fsmessage.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\fsmsg_manager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\fsmsg_manager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\imessage.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\message.cc"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\message.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\port.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\port.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\src\GameLogic\fsgame_manager.cpp"

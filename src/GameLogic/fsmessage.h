@@ -1,6 +1,7 @@
 #pragma once
 
 #include "fsbase_type.h"
+#include "imessage.h"
 
 enum d2l_Message
 {
@@ -19,12 +20,6 @@ enum l2d_Message
 	l2d_DoChange,
 	l2d_DoAction,
 	l2d_GameEnd,
-};
-
-//-----------------------------------------------------
-struct iMessage
-{
-
 };
 
 struct dMessage : public iMessage

@@ -1,7 +1,15 @@
 #pragma once
 
+#include "boost/smart_ptr/shared_ptr.hpp"
+
 #define INVALID_ID -1
+#define INVALID_INDEX -1
 #define CARDS_TOTALNUM 30
+
+#define Ptr boost::shared_ptr
+#define interface struct
+
+#define ASSERT assert
 
 enum PLAYSEQUENCE
 {
@@ -26,5 +34,6 @@ enum HERO_PROFESSION
 	PROFESSION_COUNT
 };
 
+typedef int ID;
 typedef int IID;
 typedef int CARD_ID;

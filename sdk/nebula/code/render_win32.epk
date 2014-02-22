@@ -1,0 +1,49 @@
+#-------------------------------------------------------------------------------
+#   render_win32.epk
+#   (C) 2006 Radon Labs GmbH
+#-------------------------------------------------------------------------------
+begintarget render_nidls_win32
+    settype nidl
+    setbasedir render
+    setnidlclusters {
+        graphics
+        debugrender
+        audio
+        ui
+    }
+endtarget
+
+begintarget render_win32
+    settype lib
+    setbasedir render
+    setprecompiledheader stdneb
+    setincpath_win32 "../foundation;../extlibs;../render;../addons;../addons/nebula2;../addons/nebula2/character;../addons/nebula2/anim;"
+    setdepends {
+        render_nidls_win32
+    }
+    setclusters {
+        apprender
+        debugrender
+		coreaudio coreaudio/base coreaudio/win360 coreaudio/debug
+        coregraphics coregraphics/base coregraphics/win32 coregraphics/win360 coregraphics/d3d9 coregraphics/legacy coregraphics/debug
+        input input/base input/win32 input/xinput
+        models models/load models/save models/nodes
+        frame
+        resources
+        internalgraphics
+        lighting lighting/base lighting/sm30
+        renderutil
+        graphics
+        coreanimation
+        animation
+        audio
+        ui
+    }
+endtarget            
+
+beginsolution render_win32 win32
+    settargets {
+        render_nidls_win32
+        render_win32
+    }
+endsolution
