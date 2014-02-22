@@ -22,7 +22,12 @@ enum l2d_Message
 };
 
 //-----------------------------------------------------
-struct dMessage 
+struct iMessage
+{
+
+};
+
+struct dMessage : public iMessage
 {
 	d2l_Message msgType;
 };
@@ -70,7 +75,7 @@ struct dSurranderMsg : public dMessage
 };
 
 //-----------------------------------------------------
-struct lMessage 
+struct lMessage : public iMessage
 {
 	l2d_Message msgType;
 };
