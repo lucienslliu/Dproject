@@ -12,10 +12,6 @@
 
     (C) 2006 Radon Labs GmbH
 */
-#include "core/refcounted.h"
-#include "io/binaryreader.h"
-#include "io/binarywriter.h"
-#include "messaging/id.h"
 
 //------------------------------------------------------------------------------
 /**
@@ -23,38 +19,33 @@
 */
 #define DeclareMsgId \
 public:\
-    static Messaging::Id Id; \
-    virtual const Messaging::Id& GetId() const;\
+    static ID Id; \
+    virtual const ID& GetId() const;\
 private:
 
 #define ImplementMsgId(type) \
-    Messaging::Id type::Id; \
-    const Messaging::Id& type::GetId() const { return type::Id; }
+    ID type::Id; \
+    const ID& type::GetId() const { return type::Id; }
 
-//------------------------------------------------------------------------------
-namespace Messaging
-{
-class MessageReader;
-class MessageWriter;
 class Port;
-
-class Message : public Core::RefCounted
+class Message
 {
-    __DeclareClass(Message);
+    //__DeclareClass(Message);
     DeclareMsgId;
 public:
     /// constructor
     Message();
     /// return true if message is of the given id
-    bool CheckId(const Messaging::Id& id) const;
+    bool CheckId(const ID& id) const;
     /// encode message into a stream
-    virtual void Encode(const Ptr<IO::BinaryWriter>& writer);
+    //virtual void Encode(const Ptr<IO::BinaryWriter>& writer);
     /// decode message from a stream
-    virtual void Decode(const Ptr<IO::BinaryReader>& reader);
+    //virtual void Decode(const Ptr<IO::BinaryReader>& reader);
     /// set the handled flag
     void SetHandled(bool b);
     /// return true if the message has been handled
     bool Handled() const;
+
 protected:
     bool handled;
 };
@@ -63,7 +54,7 @@ protected:
 /**
 */
 inline bool
-Message::CheckId(const Messaging::Id& id) const
+Message::CheckId(const ID& id) const
 {
     return (id == this->GetId());
 }
@@ -85,7 +76,3 @@ Message::Handled() const
 {
     return this->handled;
 }
-
-} // namespace Messaging
-//------------------------------------------------------------------------------
-#endif

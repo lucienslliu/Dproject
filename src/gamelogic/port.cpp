@@ -15,7 +15,7 @@ void Port::SetupAcceptedMessages()
     It is guaranteed that this method will only be called for messages
     which are accepted by AcceptMessage().
 */
-void Port::HandleMessage(const Ptr<iMessage>& msg)
+void Port::HandleMessage(const Ptr<Message>& msg)
 {
     // empty
 }

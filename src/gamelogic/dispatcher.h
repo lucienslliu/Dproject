@@ -34,7 +34,7 @@ public:
     /// constructor
     Dispatcher();
     /// handle a single message (distribute to ports which accept the message)
-    virtual void HandleMessage(const Ptr<iMessage>& msg);
+    virtual void HandleMessage(const Ptr<Message>& msg);
     /// attach a message port
     void AttachPort(const Ptr<Port>& port);
     /// remove a message port

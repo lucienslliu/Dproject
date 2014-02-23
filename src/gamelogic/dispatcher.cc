@@ -67,7 +67,7 @@ Dispatcher::RemovePort(const Ptr<Port>& port)
         if (this->idPortMap.end() != this->idPortMap.find(msgIdPtr))
         {            
             std::vector<Ptr<Port> >& ports = this->idPorts[this->idPortMap[msgIdPtr]];
-			std::vector<Ptr<Port> >::iterator it = std::find_if(ports.begin(), ports.end(), port);
+			std::vector<Ptr<Port> >::iterator it = std::find(ports.begin(), ports.end(), port);
             ASSERT(ports.end() != it);
             ports.erase(it);
         }        
@@ -77,7 +77,7 @@ Dispatcher::RemovePort(const Ptr<Port>& port)
     // so that's not a bug!
 
     // finally remove the port from the ports array
-	std::vector<Ptr<Port> >::iterator it = std::find_if(this->portArray.begin(), this->portArray.end(), port);
+	std::vector<Ptr<Port> >::iterator it = std::find(this->portArray.begin(), this->portArray.end(), port);
     ASSERT(this->portArray.end() != it);
     this->portArray.erase(it);
 }
@@ -90,7 +90,7 @@ bool
 Dispatcher::HasPort(const Ptr<Port>& port) const
 {
 	ASSERT(0 != port);
-	std::vector<Ptr<Port> >::const_iterator it = std::find_if(this->portArray.begin(), this->portArray.end(), port);
+	std::vector<Ptr<Port> >::const_iterator it = std::find(this->portArray.begin(), this->portArray.end(), port);
     return (this->portArray.end() != it);
 }
 
@@ -100,9 +100,9 @@ Dispatcher::HasPort(const Ptr<Port>& port) const
     which accept the message.
 */
 void
-Dispatcher::HandleMessage(const Ptr<iMessage>& msg)
+Dispatcher::HandleMessage(const Ptr<Message>& msg)
 {
-    const ID* msgIdPtr = &(msg->GetID());
+    const ID* msgIdPtr = &(msg->GetId());
 	std::map<const ID*, int>::iterator it = this->idPortMap.find(msgIdPtr);
     if (this->idPortMap.end() != it)
     {
