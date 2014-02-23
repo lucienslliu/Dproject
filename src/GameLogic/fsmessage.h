@@ -2,6 +2,12 @@
 
 #include "fsbase_type.h"
 #include "imessage.h"
+#include "message.h"
+
+class GetReadyMsg : public Message
+{
+	DeclareMsgId
+};
 
 enum d2l_Message
 {

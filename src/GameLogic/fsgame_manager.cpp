@@ -13,8 +13,10 @@ FSGameManager::~FSGameManager(void)
 
 void FSGameManager::Initialize()
 {
-	m_nStep = 0;
+	RegisterMessage(GetReadyMsg::Id);
 
+	m_nStep = 0;
+	m_CurPlayer = PLAYSEQUENCE_FIRST;
 }
 
 void FSGameManager::HandleMessage(dMessage* msg)
@@ -64,6 +66,7 @@ void FSGameManager::DoGetReady(dMessage* msg)
 	m_Heros[m_CurPlayer].DealCards(4);
 	m_Heros[otherPlayer].DealCards(4);
 	m_Heros[otherPlayer].DealSpecailCard(1);
+	
 }
 
 void FSGameManager::CalcFirstAction()
@@ -85,24 +88,14 @@ PLAYSEQUENCE FSGameManager::GetOtherPlayer()
 	return otherPlayer;
 }
 
-void FSGameManager::SendRoundBeginEvent()
-{
-
-}
-
-void FSGameManager::SendRoundEndEvent()
-{
-
-}
-
 void FSGameManager::DoChange(dMessage* msg)
 {
-
+	// 换牌
 }
 
 void FSGameManager::DoRoundAction(dMessage* msg)
 {
-	
+	// 回合中的操作
 }
 
 void FSGameManager::DoFinishAction(dMessage* msg)
@@ -119,6 +112,14 @@ void FSGameManager::DoFinishAction(dMessage* msg)
 
 void FSGameManager::DoSurrander(dMessage* msg)
 {
-	
 }
 
+void FSGameManager::SendRoundBeginEvent()
+{
+
+}
+
+void FSGameManager::SendRoundEndEvent()
+{
+
+}

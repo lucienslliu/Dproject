@@ -27,7 +27,6 @@ private:
     ID type::Id; \
     const ID& type::GetId() const { return type::Id; }
 
-class Port;
 class Message
 {
     //__DeclareClass(Message);

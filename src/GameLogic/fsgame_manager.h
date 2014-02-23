@@ -2,8 +2,9 @@
 
 #include "fsmessage.h"
 #include "fshero.h"
+#include "port.h"
 
-class FSGameManager
+class FSGameManager : public Port
 {
 public:
 	FSGameManager(void);
@@ -26,7 +27,10 @@ private:
 
 	PLAYSEQUENCE GetOtherPlayer();
 
+private:
+	// ·¢ËÍÊÂ¼ş
 	void SendRoundBeginEvent();
+
 	void SendRoundEndEvent();
 
 private:
