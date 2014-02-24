@@ -11,5 +11,5 @@ FSGameWorld::~FSGameWorld(void)
 
 void FSGameWorld::Initialize()
 {
-	m_dispatcher.AttachPort(m_GameManager);
+	this->AttachPort(m_GameManager);
 }

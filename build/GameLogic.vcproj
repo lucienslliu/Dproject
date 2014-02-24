@@ -21,7 +21,7 @@
 			OutputDirectory="../bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			CharacterSet="1"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -325,6 +325,22 @@
 			</File>
 			<File
 				RelativePath="..\src\gamelogic\port.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Main"
+			>
+			<File
+				RelativePath="..\src\gamelogic\fsgame_core.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\fsgame_core.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gamelogic\igame_core.h"
 				>
 			</File>
 		</Filter>

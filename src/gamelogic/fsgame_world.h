@@ -3,7 +3,7 @@
 #include "dispatcher.h"
 #include "fsgame_manager.h"
 
-class FSGameWorld
+class FSGameWorld : public Dispatcher
 {
 public:
 	FSGameWorld(void);
@@ -15,5 +15,4 @@ public:
 private:
 	Ptr<FSGameManager> m_GameManager;
 
-	Dispatcher m_dispatcher;
 };
