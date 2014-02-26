@@ -6,6 +6,8 @@
 #include <Windows.h>
 #include <iostream>
 
+#include "../common/common_log.h"
+
 extern "C" _declspec(dllimport) int Test();
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -32,6 +34,8 @@ int _tmain(int argc, _TCHAR* argv[])
 				if (std::cin >> ch && ch == 'y')
 				{
 					pCore->UnInit();
+// 					Log::Instance().Init("test.log");
+// 					Log::Instance().Print("test!");
 				}
 			}
 		}

@@ -9,8 +9,16 @@ public:
 	FSGameWorld(void);
 	~FSGameWorld(void);
 
+	static FSGameWorld& Instance()
+	{
+		static FSGameWorld GW;
+		return GW;
+	}
+
 public:
 	void Initialize();
+
+	void Run();
 
 private:
 	Ptr<FSGameManager> m_GameManager;
