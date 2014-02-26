@@ -11,6 +11,13 @@ FSGameCore::~FSGameCore(void)
 
 bool FSGameCore::Initialize()
 {
+	m_GT.Start();
+	return true;
+}
+
+bool FSGameCore::UnInit()
+{
+	m_GT.Stop();
 	return true;
 }
 
@@ -18,9 +25,9 @@ void FSGameCore::SendMessage()
 {
 
 }
-/*
-int CreateGameCore()
+
+IGameCore* CreateGameCore()
 {
 	IGameCore* pCore = new FSGameCore();
-	return 0;
-}*/
+	return pCore;
+}

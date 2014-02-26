@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "../src/gamelogic/igame_core.h"
 #include <Windows.h>
+#include <iostream>
 
 extern "C" _declspec(dllimport) int Test();
 
@@ -11,7 +12,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	int i = Test();
 	
-	typedef int (CALLBACK *CreateGameCore)();
+	typedef IGameCore* (CALLBACK *CreateGameCore)();
 
 	HINSTANCE hDLL;
 	CreateGameCore createGameCore;
@@ -22,8 +23,17 @@ int _tmain(int argc, _TCHAR* argv[])
 		createGameCore = (CreateGameCore)GetProcAddress(hDLL, "CreateGameCore");
 		if (createGameCore)
 		{
-			int pCore = createGameCore();
-			pCore = 0;
+			IGameCore* pCore = createGameCore();
+			if (pCore)
+			{
+				pCore->Initialize();
+
+				char ch;
+				if (std::cin >> ch && ch == 'y')
+				{
+					pCore->UnInit();
+				}
+			}
 		}
 		else
 		{
