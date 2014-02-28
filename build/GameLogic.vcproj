@@ -176,10 +176,6 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\src\GameLogic\fs_std.h"
-				>
-			</File>
-			<File
 				RelativePath="..\src\GameLogic\fsbase_type.h"
 				>
 			</File>
@@ -286,14 +282,6 @@
 			Name="Message"
 			>
 			<File
-				RelativePath="..\src\gamelogic\dispatcher.cc"
-				>
-			</File>
-			<File
-				RelativePath="..\src\gamelogic\dispatcher.h"
-				>
-			</File>
-			<File
 				RelativePath="..\src\gamelogic\fsmessage.cpp"
 				>
 			</File>
@@ -307,26 +295,6 @@
 			</File>
 			<File
 				RelativePath="..\src\gamelogic\fsmsg_manager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\gamelogic\imessage.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\gamelogic\message.cc"
-				>
-			</File>
-			<File
-				RelativePath="..\src\gamelogic\message.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\gamelogic\port.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\gamelogic\port.h"
 				>
 			</File>
 		</Filter>

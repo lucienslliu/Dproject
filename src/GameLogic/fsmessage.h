@@ -1,7 +1,6 @@
 #pragma once
 
 #include "fsbase_type.h"
-#include "imessage.h"
 #include "message.h"
 
 class GetReadyMsg : public Message
@@ -28,7 +27,7 @@ enum l2d_Message
 	l2d_GameEnd,
 };
 
-struct dMessage : public iMessage
+struct dMessage : public Message
 {
 	d2l_Message msgType;
 };
@@ -76,7 +75,7 @@ struct dSurranderMsg : public dMessage
 };
 
 //-----------------------------------------------------
-struct lMessage : public iMessage
+struct lMessage : public Message
 {
 	l2d_Message msgType;
 };

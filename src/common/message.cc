@@ -3,7 +3,7 @@
 //  (C) 2006 Radon Labs GmbH
 //------------------------------------------------------------------------------
 
-#include "stdlogic.h"
+#include "stdcommon.h"
 #include "message.h"
 
 ImplementMsgId(Message)
