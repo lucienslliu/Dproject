@@ -9,5 +9,5 @@ public:
 	virtual ~FSCard(void);
 
 private:
-	IID m_cardID;
+	ID m_cardID;
 };

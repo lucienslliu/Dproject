@@ -26,7 +26,7 @@ void FSUnitManager::DestroyUnit(FSUnit* unit)
 	}
 }
 
-void FSUnitManager::DestroyUnit(IID unitID)
+void FSUnitManager::DestroyUnit(ID unitID)
 {
 	UNITMAP::iterator it = m_unitmap.find(unitID);
 	if (it != m_unitmap.end())

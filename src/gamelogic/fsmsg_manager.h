@@ -1,8 +1,10 @@
 #pragma once
 
+#include "dispatcher.h"
 #include "fsmessage.h"
+#include "fsgame_manager.h"
 
-class FSMsgManager
+class FSMsgManager : public Dispatcher
 {
 public:
 	FSMsgManager(void);
@@ -17,6 +19,8 @@ public:
 public:
 	void Init();
 
-	void SendMessage();
+	void SendMessage(Message* msg);
 
+private:
+	Ptr<FSGameManager> m_GameManager;
 };

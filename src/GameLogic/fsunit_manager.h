@@ -14,11 +14,11 @@ public:
 
 	void DestroyUnit(FSUnit* unit);
 
-	void DestroyUnit(IID unitID);
+	void DestroyUnit(ID unitID);
 
 	void Update();
 
 private:
-	typedef std::map<IID, FSUnit*> UNITMAP;
+	typedef std::map<ID, FSUnit*> UNITMAP;
 	UNITMAP m_unitmap;
 };

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "message.h"
+
 class IGameCore
 {
 public:
@@ -7,7 +9,7 @@ public:
 
 	virtual bool UnInit() = 0;
 
-	virtual void SendMessage() = 0;
+	virtual void SendMessage(Message* msg) = 0;
 
 };
 #ifdef __cplusplus

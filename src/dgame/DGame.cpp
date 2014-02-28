@@ -2,11 +2,11 @@
 //
 
 #include "stdafx.h"
-#include "../src/gamelogic/igame_core.h"
 #include <Windows.h>
 #include <iostream>
 
 #include "../common/common_log.h"
+#include "../src/gamelogic/igame_core.h"
 
 extern "C" _declspec(dllimport) int Test();
 

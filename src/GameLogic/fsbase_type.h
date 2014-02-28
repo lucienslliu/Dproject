@@ -6,7 +6,14 @@
 #define INVALID_INDEX -1
 #define CARDS_TOTALNUM 30
 
+#ifdef Ptr
+#undef Ptr
+#endif
 #define Ptr boost::shared_ptr
+
+#ifdef interface
+#undef interface
+#endif
 #define interface struct
 
 #define ASSERT assert
@@ -35,5 +42,4 @@ enum HERO_PROFESSION
 };
 
 typedef int ID;
-typedef int IID;
 typedef int CARD_ID;

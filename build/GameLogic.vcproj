@@ -362,14 +362,6 @@
 			RelativePath="..\src\GameLogic\fsgame_manager.h"
 			>
 		</File>
-		<File
-			RelativePath="..\src\gamelogic\fsgame_world.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\src\gamelogic\fsgame_world.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

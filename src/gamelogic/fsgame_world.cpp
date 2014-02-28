@@ -11,12 +11,15 @@ FSGameWorld::~FSGameWorld(void)
 
 void FSGameWorld::Initialize()
 {
-	m_GameManager.reset(new FSGameManager());
-	m_GameManager->Initialize();
-
-	this->AttachPort(m_GameManager);
 }
 
-void FSGameWorld::Run()
+void FSGameWorld::Tick()
 {
+	m_GameManager->Tick();
+	//Dispatcher::HandleMessage();
+}
+
+void FSGameWorld::HandleMessage(const Ptr<Message>& msg)
+{
+	
 }

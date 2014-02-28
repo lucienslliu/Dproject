@@ -3,8 +3,7 @@
 #include <boost/bind.hpp>
 
 #include "common_log.h"
-
-#include "fsgame_world.h"
+#include "fsmsg_manager.h"
 
 FSGameThread::FSGameThread(void)
 : m_bStop(false)
@@ -19,7 +18,7 @@ void FSGameThread::Start()
 {
 	Log::Instance().Init("fsgamelogic.log");
 	Log::Instance().Print("FSGameThread Start!");
-	FSGameWorld::Instance().Initialize();
+	FSMsgManager::Instance().Init();
 
 	m_pThread.reset(new boost::thread(boost::bind(&FSGameThread::Loop, this)));
 }
@@ -40,13 +39,11 @@ void FSGameThread::Loop()
 			// 这是个中断点
 			//boost::this_thread::interruption_point();
 
-			FSGameWorld::Instance().Run();
-
 			// 这里也是中断点
 			boost::this_thread::sleep(boost::posix_time::seconds(1));
 		}
 
-		;
+		Log::Instance().Print("Logic thread End!");
 	}
 	catch (boost::thread_interrupted& /*e*/)
 	{

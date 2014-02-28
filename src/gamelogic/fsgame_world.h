@@ -1,6 +1,5 @@
 #pragma once
 
-#include "dispatcher.h"
 #include "fsgame_manager.h"
 
 class FSGameWorld : public Dispatcher
@@ -18,9 +17,10 @@ public:
 public:
 	void Initialize();
 
-	void Run();
+	void Tick();
+
+	void HandleMessage(const Ptr<Message>& msg);
 
 private:
-	Ptr<FSGameManager> m_GameManager;
 
 };

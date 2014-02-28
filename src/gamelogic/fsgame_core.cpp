@@ -21,7 +21,7 @@ bool FSGameCore::UnInit()
 	return true;
 }
 
-void FSGameCore::SendMessage()
+void FSGameCore::SendMessage(Message* msg)
 {
 
 }

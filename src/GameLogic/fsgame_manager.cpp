@@ -48,6 +48,11 @@ void FSGameManager::HandleMessage(dMessage* msg)
 	}
 }
 
+void FSGameManager::Tick()
+{
+
+}
+
 void FSGameManager::DoGetReady(dMessage* msg)
 {
 	dGetReadyMsg* getReadyMsg = (dGetReadyMsg*)msg;

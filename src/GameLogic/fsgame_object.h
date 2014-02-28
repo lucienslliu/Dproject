@@ -10,9 +10,9 @@ public:
 	FSGameObject(void);
 	virtual ~FSGameObject(void);
 
-	IID GetUniqueID() { return m_id; }
-	void SetUniqueID(IID id) { m_id = id; }
+	ID GetUniqueID() { return m_id; }
+	void SetUniqueID(ID id) { m_id = id; }
 
 private:
-	IID m_id;
+	ID m_id;
 };

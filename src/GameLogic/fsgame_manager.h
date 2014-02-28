@@ -15,6 +15,8 @@ public:
 
 	void HandleMessage(dMessage* msg);
 
+	void Tick();
+
 private:
 	void DoGetReady(dMessage* msg);
 	void DoChange(dMessage* msg);
