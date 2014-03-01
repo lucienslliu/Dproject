@@ -36,7 +36,7 @@ Dispatcher::AttachPort(const Ptr<Port>& port)
     {
         const ID* msgIdPtr = idArray[i];
         this->RegisterMessage(*msgIdPtr);
-        if (this->idPortMap.end() != this->idPortMap.find(msgIdPtr))
+        if (this->idPortMap.end() == this->idPortMap.find(msgIdPtr))
         {
             // need to add a new empty entry
             std::vector<Ptr<Port> > emptyArray;

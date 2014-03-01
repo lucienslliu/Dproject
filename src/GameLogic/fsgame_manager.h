@@ -13,7 +13,7 @@ public:
 public:
 	void Initialize();
 
-	void HandleMessage(dMessage* msg);
+	void HandleMessage(const Ptr<Message>& msg);
 
 	void Tick();
 

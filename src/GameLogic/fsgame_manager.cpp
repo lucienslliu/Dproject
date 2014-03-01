@@ -19,16 +19,17 @@ void FSGameManager::Initialize()
 	m_CurPlayer = PLAYSEQUENCE_FIRST;
 }
 
-void FSGameManager::HandleMessage(dMessage* msg)
+void FSGameManager::HandleMessage(const Ptr<Message>& msg)
 {
 	if (!msg)
 	{
 		return;
 	}
 	
-	switch (msg->msgType)
+	ID msgID = msg->GetId();
+	/*switch (msgID)
 	{
-	case d2l_GetReady:
+	case Message::CheckId:
 		DoGetReady(msg);
 		break;
 	case d2l_ReqChange:
@@ -45,7 +46,7 @@ void FSGameManager::HandleMessage(dMessage* msg)
 		break;
 	default:
 		break;
-	}
+	}*/
 }
 
 void FSGameManager::Tick()
