@@ -13,7 +13,7 @@ FSGameManager::~FSGameManager(void)
 
 void FSGameManager::Initialize()
 {
-	RegisterMessage(GetReadyMsg::Id);
+	RegisterMessage(FSGetReadyMsg::Id);
 
 	m_nStep = 0;
 	m_CurPlayer = PLAYSEQUENCE_FIRST;

@@ -21,6 +21,9 @@ void FSGameThread::Start()
 	FSMsgManager::Instance().Init();
 
 	m_pThread.reset(new boost::thread(boost::bind(&FSGameThread::Loop, this)));
+
+	Ptr<FSGetReadyMsg> msg(new FSGetReadyMsg());
+	FSMsgManager::Instance().SendSyncMessage(msg);
 }
 
 void FSGameThread::Stop()
@@ -37,7 +40,7 @@ void FSGameThread::Loop()
 		while (!m_bStop)
 		{
 			// 这是个中断点
-			//boost::this_thread::interruption_point();
+			boost::this_thread::interruption_point();
 
 			// 这里也是中断点
 			boost::this_thread::sleep(boost::posix_time::seconds(1));

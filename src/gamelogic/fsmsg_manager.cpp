@@ -23,3 +23,13 @@ void FSMsgManager::SendMessage(Message* msg)
 	Dispatcher::HandleMessage(m);
 }
 
+void FSMsgManager::SendSyncMessage(Ptr<Message> msg)
+{
+	Ptr<Message> m(msg);
+	Dispatcher::HandleMessage(m);
+}
+
+void FSMsgManager::SendAsyncMessage(Ptr<Message> msg)
+{
+	m_MsgList.push_back(msg);
+}

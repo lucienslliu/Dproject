@@ -61,6 +61,6 @@ inline
 bool 
 Port::AcceptsMessage(const ID& msgId) const
 {
-	return (this->acceptedMessageIds.end() != std::find(
+	return (this->acceptedMessageIds.end() == std::find(
 		this->acceptedMessageIds.begin(), this->acceptedMessageIds.end(), &msgId));
 }

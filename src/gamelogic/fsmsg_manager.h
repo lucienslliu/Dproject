@@ -21,6 +21,13 @@ public:
 
 	void SendMessage(Message* msg);
 
+	void SendSyncMessage(Ptr<Message> msg);
+
+	void SendAsyncMessage(Ptr<Message> msg);
+
 private:
 	Ptr<FSGameManager> m_GameManager;
+
+	typedef std::vector<Ptr<Message> > MESSAGELIST;
+	MESSAGELIST m_MsgList;
 };

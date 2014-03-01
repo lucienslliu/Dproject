@@ -3,7 +3,43 @@
 #include "fsbase_type.h"
 #include "message.h"
 
-class GetReadyMsg : public Message
+//////////////////////////////////////////////////////////////////////////
+
+class FSMessage : public Message
+{
+	DeclareMsgId
+public:
+
+	bool IsSyncMsg() { return m_sync; }
+	void SetSyncMsg(bool sync) { m_sync = sync; } 
+
+protected:
+	bool m_sync;
+};
+
+class FSSyncMessage : public FSMessage
+{
+	DeclareMsgId
+public:
+	FSSyncMessage()
+	{
+		m_sync = true;
+	}
+};
+
+class FSAsyncMessage : public FSMessage
+{
+	DeclareMsgId
+public:
+	FSAsyncMessage()
+	{
+		m_sync = false;
+	}
+};
+
+//////////////////////////////////////////////////////////////////////////
+
+class FSGetReadyMsg : public FSAsyncMessage
 {
 	DeclareMsgId
 };

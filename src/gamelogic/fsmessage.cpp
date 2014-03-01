@@ -1,4 +1,7 @@
 #include "stdlogic.h"
 #include "fsmessage.h"
 
-ImplementMsgId(GetReadyMsg)
+ImplementMsgId(FSMessage)
+ImplementMsgId(FSSyncMessage)
+ImplementMsgId(FSAsyncMessage)
+ImplementMsgId(FSGetReadyMsg)
