@@ -4,4 +4,6 @@
 ImplementMsgId(FSMessage)
 ImplementMsgId(FSSyncMessage)
 ImplementMsgId(FSAsyncMessage)
+
 ImplementMsgId(FSGetReadyMsg)
+ImplementMsgId(FSRoundActionMsg)

@@ -1,5 +1,6 @@
 #include "stdlogic.h"
 #include "fsgame_core.h"
+#include "fsmsg_manager.h"
 
 FSGameCore::FSGameCore(void)
 {
@@ -23,7 +24,8 @@ bool FSGameCore::UnInit()
 
 void FSGameCore::SendMessage(Message* msg)
 {
-
+	Ptr<Message> pMsg(msg);
+	FSMsgManager::Instance().SendAsyncMessage(pMsg);
 }
 
 IGameCore* CreateGameCore()

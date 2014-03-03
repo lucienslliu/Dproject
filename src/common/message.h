@@ -26,7 +26,7 @@ public:\
 private:
 
 #define ImplementMsgId(type) \
-    ID type::Id; \
+	ID type::Id = EM_##type; \
     const ID& type::GetId() const { return type::Id; }
 
 class Message

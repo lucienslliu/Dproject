@@ -24,6 +24,9 @@ void FSGameThread::Start()
 
 	Ptr<FSGetReadyMsg> msg(new FSGetReadyMsg());
 	FSMsgManager::Instance().SendSyncMessage(msg);
+
+	Ptr<FSRoundActionMsg> msg1(new FSRoundActionMsg());
+	FSMsgManager::Instance().SendSyncMessage(msg1);
 }
 
 void FSGameThread::Stop()

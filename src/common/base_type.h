@@ -18,3 +18,18 @@
 #define INVALID_INDEX -1
 
 typedef int ID;
+
+enum EMessageType
+{
+	EM_MessageBegin,
+	EM_Message = EM_MessageBegin,
+	EM_FSMessage = EM_MessageBegin,
+	EM_FSSyncMessage = EM_MessageBegin,
+	EM_FSAsyncMessage = EM_MessageBegin,
+	EM_FSGetReadyMsg = EM_MessageBegin,
+	EM_FSRoundActionMsg,
+	EM_ReqRoundAction,
+	EM_ReqFinishAction,
+	EM_ReqSurrander,
+};
+

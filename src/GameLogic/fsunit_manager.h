@@ -9,16 +9,26 @@ public:
 	FSUnitManager(void);
 	~FSUnitManager(void);
 
-public:
-	FSUnit* CreateUnit();
+	bool Init();
 
-	void DestroyUnit(FSUnit* unit);
+	static FSUnitManager& Instance()
+	{
+		static FSUnitManager UM;
+		return UM;
+	}
+
+public:
+	Ptr<FSUnit> CreateUnit();
+
+	void DestroyUnit(Ptr<FSUnit> unit);
 
 	void DestroyUnit(ID unitID);
 
 	void Update();
 
+	Ptr<FSUnit> FindUnit(ID unitID);
+
 private:
-	typedef std::map<ID, FSUnit*> UNITMAP;
+	typedef std::map<ID, Ptr<FSUnit> > UNITMAP;
 	UNITMAP m_unitmap;
 };

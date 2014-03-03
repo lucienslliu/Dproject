@@ -32,28 +32,53 @@ class FSAsyncMessage : public FSMessage
 	DeclareMsgId
 public:
 	FSAsyncMessage()
+		: m_playerId(0)
 	{
 		m_sync = false;
 	}
+
+	void SetPlayerID(ID pid) { m_playerId = pid; }
+	ID GetPlayerID() { return m_playerId; }
+
+private:
+	ID m_playerId;
 };
 
 //////////////////////////////////////////////////////////////////////////
 
+struct PlayerInfo 
+{
+	HERO_PROFESSION profession;
+	int cards[CARDS_TOTALNUM];
+};
+
 class FSGetReadyMsg : public FSAsyncMessage
 {
 	DeclareMsgId
+
+public:
+	PlayerInfo player;
 };
 
-enum d2l_Message
+class FSRoundActionMsg : public FSAsyncMessage
 {
-	d2l_Begin,
-	d2l_GetReady = d2l_Begin,
-	d2l_ReqChange,
-	d2l_ReqRoundAction,
-	d2l_ReqFinishAction,
-	d2l_ReqSurrander,
+	DeclareMsgId
+
+public:
+
+	ID attackerID;
+	ID victimID;
+
 };
 
+class FSRoundEndMsg : public FSAsyncMessage
+{
+	DeclareMsgId
+
+private:
+};
+
+/*
 enum l2d_Message
 {
 	l2d_Begin,
@@ -62,18 +87,11 @@ enum l2d_Message
 	l2d_DoAction,
 	l2d_GameEnd,
 };
-
 struct dMessage : public Message
 {
 	d2l_Message msgType;
 };
 
-struct PlayerInfo 
-{
-	int nPlayerID;
-	HERO_PROFESSION profession;
-	int cards[CARDS_TOTALNUM];
-};
 
 struct dGetReadyMsg : public dMessage
 {
@@ -115,3 +133,4 @@ struct lMessage : public Message
 {
 	l2d_Message msgType;
 };
+*/

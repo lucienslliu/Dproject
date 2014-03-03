@@ -4,6 +4,13 @@
 #include "fshero.h"
 #include "port.h"
 
+enum EGameState
+{
+	EGameState_WaitPlayer,
+	EGameState_Playing,
+	EGameState_Finish,
+};
+
 class FSGameManager : public Port
 {
 public:
@@ -18,13 +25,15 @@ public:
 	void Tick();
 
 private:
-	void DoGetReady(dMessage* msg);
-	void DoChange(dMessage* msg);
-	void DoRoundAction(dMessage* msg);
-	void DoFinishAction(dMessage* msg);
-	void DoSurrander(dMessage* msg);
+	void DoGetReady(const Ptr<Message>& msg);
+	void DoChange(const Ptr<Message>& msg);
+	void DoRoundAction(const Ptr<Message>& msg);
+	void DoFinishAction(const Ptr<Message>& msg);
+	void DoSurrander(const Ptr<Message>& msg);
 
 private:
+	void GameBegin();
+
 	void CalcFirstAction();
 
 	PLAYSEQUENCE GetOtherPlayer();
@@ -36,6 +45,7 @@ private:
 	void SendRoundEndEvent();
 
 private:
+	EGameState m_stat;
 
 	int m_nStep;
 

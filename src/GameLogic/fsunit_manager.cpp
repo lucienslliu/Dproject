@@ -9,16 +9,20 @@ FSUnitManager::~FSUnitManager(void)
 {
 }
 
-FSUnit* FSUnitManager::CreateUnit()
+bool FSUnitManager::Init()
 {
-	FSUnit* unit = new FSUnit();
+	return true;
+}
 
+Ptr<FSUnit> FSUnitManager::CreateUnit()
+{
+	Ptr<FSUnit> unit(new FSUnit());
 	m_unitmap[unit->GetUniqueID()] = unit;
 
 	return unit;
 }
 
-void FSUnitManager::DestroyUnit(FSUnit* unit)
+void FSUnitManager::DestroyUnit(Ptr<FSUnit> unit)
 {
 	if (unit)
 	{
@@ -43,3 +47,18 @@ void FSUnitManager::Update()
 		it->second->Update();
 	}
 }
+
+Ptr<FSUnit> FSUnitManager::FindUnit(ID unitID)
+{
+	Ptr<FSUnit> unit;
+	UNITMAP::iterator it = m_unitmap.find(unitID);
+	if (it != m_unitmap.end())
+	{
+		unit = it->second;
+		return unit;
+	}
+
+	return unit;
+}
+
+

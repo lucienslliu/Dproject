@@ -1,6 +1,6 @@
 #include "stdlogic.h"
 #include "fsgame_manager.h"
-#include <math.h>
+#include "fsunit_manager.h"
 
 FSGameManager::FSGameManager(void)
 : m_nStep(0)
@@ -14,7 +14,11 @@ FSGameManager::~FSGameManager(void)
 void FSGameManager::Initialize()
 {
 	RegisterMessage(FSGetReadyMsg::Id);
+	RegisterMessage(FSRoundActionMsg::Id);
 
+	FSUnitManager::Instance().Init();
+
+	m_stat = EGameState_WaitPlayer;
 	m_nStep = 0;
 	m_CurPlayer = PLAYSEQUENCE_FIRST;
 }
@@ -27,26 +31,18 @@ void FSGameManager::HandleMessage(const Ptr<Message>& msg)
 	}
 	
 	ID msgID = msg->GetId();
-	/*switch (msgID)
+	if (msgID == FSGetReadyMsg::Id)
 	{
-	case Message::CheckId:
 		DoGetReady(msg);
-		break;
-	case d2l_ReqChange:
-		DoChange(msg);
-		break;
-	case d2l_ReqRoundAction:
+	}
+	else if (msgID == FSRoundActionMsg::Id)
+	{
 		DoRoundAction(msg);
-		break;
-	case d2l_ReqFinishAction:
-		DoFinishAction(msg);
-		break;
-	case d2l_ReqSurrander:
-		DoSurrander(msg);
-		break;
-	default:
-		break;
-	}*/
+	}
+	else
+	{
+		;
+	}
 }
 
 void FSGameManager::Tick()
@@ -54,25 +50,42 @@ void FSGameManager::Tick()
 
 }
 
-void FSGameManager::DoGetReady(dMessage* msg)
+void FSGameManager::DoGetReady(const Ptr<Message>& msg)
+{	
+	Ptr<FSGetReadyMsg> getReadyMsg = boost::static_pointer_cast<FSGetReadyMsg>(msg);
+
+	if (m_CurPlayer == PLAYSEQUENCE_FIRST)
+	{
+		m_Heros[PLAYSEQUENCE_FIRST].SetPlayerID(getReadyMsg->GetPlayerID());
+		m_Heros[PLAYSEQUENCE_FIRST].SetProfession(getReadyMsg->player.profession);
+		m_Heros[PLAYSEQUENCE_FIRST].SetCards(getReadyMsg->player.cards);
+	}
+	else
+	{
+		m_Heros[PLAYSEQUENCE_SECOND].SetPlayerID(getReadyMsg->GetPlayerID());
+		m_Heros[PLAYSEQUENCE_SECOND].SetProfession(getReadyMsg->player.profession);
+		m_Heros[PLAYSEQUENCE_SECOND].SetCards(getReadyMsg->player.cards);
+
+		m_stat = EGameState_Playing;
+	}
+
+
+	if (m_stat == EGameState_Playing)
+	{
+		GameBegin();
+	}	
+}
+
+void FSGameManager::GameBegin()
 {
-	dGetReadyMsg* getReadyMsg = (dGetReadyMsg*)msg;
-
-	m_Heros[PLAYSEQUENCE_FIRST].SetPlayerID(getReadyMsg->player[PLAYSEQUENCE_FIRST].nPlayerID);
-	m_Heros[PLAYSEQUENCE_FIRST].SetProfession(getReadyMsg->player[PLAYSEQUENCE_FIRST].profession);
-	m_Heros[PLAYSEQUENCE_FIRST].SetCards(getReadyMsg->player[PLAYSEQUENCE_FIRST].cards);
-
-	m_Heros[PLAYSEQUENCE_SECOND].SetPlayerID(getReadyMsg->player[PLAYSEQUENCE_SECOND].nPlayerID);
-	m_Heros[PLAYSEQUENCE_SECOND].SetProfession(getReadyMsg->player[PLAYSEQUENCE_SECOND].profession);
-	m_Heros[PLAYSEQUENCE_SECOND].SetCards(getReadyMsg->player[PLAYSEQUENCE_SECOND].cards);
-
 	CalcFirstAction();
 
+	const int BEGIN_CARD_NUM = 4;
+	const CARD_ID BEGIN_CARD_ID = 1;
 	PLAYSEQUENCE otherPlayer = GetOtherPlayer();
-	m_Heros[m_CurPlayer].DealCards(4);
-	m_Heros[otherPlayer].DealCards(4);
-	m_Heros[otherPlayer].DealSpecailCard(1);
-	
+	m_Heros[m_CurPlayer].DealCards(BEGIN_CARD_NUM);
+	m_Heros[otherPlayer].DealCards(BEGIN_CARD_NUM);
+	m_Heros[otherPlayer].DealSpecailCard(BEGIN_CARD_ID);
 }
 
 void FSGameManager::CalcFirstAction()
@@ -94,17 +107,29 @@ PLAYSEQUENCE FSGameManager::GetOtherPlayer()
 	return otherPlayer;
 }
 
-void FSGameManager::DoChange(dMessage* msg)
+void FSGameManager::DoChange(const Ptr<Message>& msg)
 {
 	// 换牌
 }
 
-void FSGameManager::DoRoundAction(dMessage* msg)
+void FSGameManager::DoRoundAction(const Ptr<Message>& msg)
 {
 	// 回合中的操作
+	Ptr<FSRoundActionMsg> getReadyMsg = boost::static_pointer_cast<FSRoundActionMsg>(msg);
+
+	Ptr<FSUnit> pAttacker = FSUnitManager::Instance().FindUnit(getReadyMsg->attackerID);
+	Ptr<FSUnit> pVictim = FSUnitManager::Instance().FindUnit(getReadyMsg->victimID);
+
+	if (!pAttacker || !pVictim)
+	{
+		return;
+	}
+
+	// 攻击
+
 }
 
-void FSGameManager::DoFinishAction(dMessage* msg)
+void FSGameManager::DoFinishAction(const Ptr<Message>& msg)
 {
 	// 回合结束事件
 	SendRoundEndEvent();
@@ -116,7 +141,7 @@ void FSGameManager::DoFinishAction(dMessage* msg)
 	SendRoundBeginEvent();
 }
 
-void FSGameManager::DoSurrander(dMessage* msg)
+void FSGameManager::DoSurrander(const Ptr<Message>& msg)
 {
 }
 
