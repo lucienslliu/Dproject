@@ -24,11 +24,15 @@ public:
 
 	void DealSpecailCard(CARD_ID card);
 
+	void UseCard(CARD_ID card);
+
 private:
 	int m_nPlayerID;
 
 	HERO_PROFESSION m_Profession;
 
-	std::vector<CARD_ID> m_restCards;
-	std::vector<CARD_ID> m_useCards;
+	typedef std::vector<CARD_ID> CARDLIST;
+
+	CARDLIST m_restCards;
+	CARDLIST m_handCards;
 };

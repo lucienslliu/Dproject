@@ -60,7 +60,16 @@ public:
 	PlayerInfo player;
 };
 
-class FSRoundActionMsg : public FSAsyncMessage
+class FSUseCardMsg : public FSAsyncMessage
+{
+	DeclareMsgId
+
+public:
+	
+	CARD_ID cardID;
+};
+
+class FSAttackMsg : public FSAsyncMessage
 {
 	DeclareMsgId
 

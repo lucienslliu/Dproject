@@ -15,6 +15,13 @@ public:
 public:
 	void Update();
 
+	void Attack(Ptr<FSUnit> pVictim);
+
+	int GetAttack();
+	int GetLife();
+
+	void ChangeLife(int nLife);
+
 private:
 	FSPropertyAttr m_PropAttr;
 	FSPropertyBuff m_PropBuff;

@@ -24,9 +24,13 @@ void FSGameThread::Start()
 
 	Ptr<FSGetReadyMsg> msg(new FSGetReadyMsg());
 	FSMsgManager::Instance().SendSyncMessage(msg);
+	FSMsgManager::Instance().SendSyncMessage(msg);
 
-	Ptr<FSRoundActionMsg> msg1(new FSRoundActionMsg());
+	Ptr<FSUseCardMsg> msg1(new FSUseCardMsg());
 	FSMsgManager::Instance().SendSyncMessage(msg1);
+
+	Ptr<FSAttackMsg> msg2(new FSAttackMsg());
+	FSMsgManager::Instance().SendSyncMessage(msg2);
 }
 
 void FSGameThread::Stop()

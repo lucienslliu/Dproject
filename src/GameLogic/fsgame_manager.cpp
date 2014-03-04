@@ -14,7 +14,8 @@ FSGameManager::~FSGameManager(void)
 void FSGameManager::Initialize()
 {
 	RegisterMessage(FSGetReadyMsg::Id);
-	RegisterMessage(FSRoundActionMsg::Id);
+	RegisterMessage(FSUseCardMsg::Id);
+	RegisterMessage(FSAttackMsg::Id);
 
 	FSUnitManager::Instance().Init();
 
@@ -31,11 +32,18 @@ void FSGameManager::HandleMessage(const Ptr<Message>& msg)
 	}
 	
 	ID msgID = msg->GetId();
-	if (msgID == FSGetReadyMsg::Id)
+	if (msgID == FSGetReadyMsg::Id && 
+		m_stat == EGameState_WaitPlayer)
 	{
 		DoGetReady(msg);
 	}
-	else if (msgID == FSRoundActionMsg::Id)
+	else if (msgID == FSUseCardMsg::Id && 
+		m_stat == EGameState_Playing)
+	{
+		DoUseCard(msg);
+	}
+	else if (msgID == FSAttackMsg::Id && 
+		m_stat == EGameState_Playing)
 	{
 		DoRoundAction(msg);
 	}
@@ -59,6 +67,7 @@ void FSGameManager::DoGetReady(const Ptr<Message>& msg)
 		m_Heros[PLAYSEQUENCE_FIRST].SetPlayerID(getReadyMsg->GetPlayerID());
 		m_Heros[PLAYSEQUENCE_FIRST].SetProfession(getReadyMsg->player.profession);
 		m_Heros[PLAYSEQUENCE_FIRST].SetCards(getReadyMsg->player.cards);
+		m_CurPlayer = PLAYSEQUENCE_SECOND;
 	}
 	else
 	{
@@ -69,11 +78,15 @@ void FSGameManager::DoGetReady(const Ptr<Message>& msg)
 		m_stat = EGameState_Playing;
 	}
 
-
 	if (m_stat == EGameState_Playing)
 	{
 		GameBegin();
 	}	
+}
+
+void FSGameManager::DoUseCard(const Ptr<Message>& msg)
+{
+
 }
 
 void FSGameManager::GameBegin()
@@ -109,13 +122,13 @@ PLAYSEQUENCE FSGameManager::GetOtherPlayer()
 
 void FSGameManager::DoChange(const Ptr<Message>& msg)
 {
-	// 换牌
+	// 换牌 暂时不搞
 }
 
 void FSGameManager::DoRoundAction(const Ptr<Message>& msg)
 {
 	// 回合中的操作
-	Ptr<FSRoundActionMsg> getReadyMsg = boost::static_pointer_cast<FSRoundActionMsg>(msg);
+	Ptr<FSAttackMsg> getReadyMsg = boost::static_pointer_cast<FSAttackMsg>(msg);
 
 	Ptr<FSUnit> pAttacker = FSUnitManager::Instance().FindUnit(getReadyMsg->attackerID);
 	Ptr<FSUnit> pVictim = FSUnitManager::Instance().FindUnit(getReadyMsg->victimID);
@@ -126,6 +139,7 @@ void FSGameManager::DoRoundAction(const Ptr<Message>& msg)
 	}
 
 	// 攻击
+	pAttacker->Attack(pVictim);
 
 }
 
@@ -143,6 +157,7 @@ void FSGameManager::DoFinishAction(const Ptr<Message>& msg)
 
 void FSGameManager::DoSurrander(const Ptr<Message>& msg)
 {
+
 }
 
 void FSGameManager::SendRoundBeginEvent()

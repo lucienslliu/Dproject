@@ -322,6 +322,10 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Effect"
+			>
+		</Filter>
 		<File
 			RelativePath="..\src\GameLogic\fsgame_manager.cpp"
 			>

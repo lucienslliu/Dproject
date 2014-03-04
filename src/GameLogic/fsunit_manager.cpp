@@ -62,3 +62,16 @@ Ptr<FSUnit> FSUnitManager::FindUnit(ID unitID)
 }
 
 
+void FSUnitManager::UpdateDeadUnit(Ptr<FSUnit> unit)
+{
+	if (!unit)
+	{
+		return;
+	}
+
+	if (unit->GetLife() <= 0)
+	{
+		FSUnitManager::Instance().DestroyUnit(unit);
+	}
+}
+

@@ -28,6 +28,8 @@ public:
 
 	Ptr<FSUnit> FindUnit(ID unitID);
 
+	void UpdateDeadUnit(Ptr<FSUnit> unit);
+
 private:
 	typedef std::map<ID, Ptr<FSUnit> > UNITMAP;
 	UNITMAP m_unitmap;
