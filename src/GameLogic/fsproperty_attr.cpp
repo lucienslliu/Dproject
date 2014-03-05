@@ -2,8 +2,8 @@
 #include "fsproperty_attr.h"
 
 FSPropertyAttr::FSPropertyAttr(void)
-: m_nLife(5)
-, m_nAttack(4)
+: m_nLife(1)
+, m_nAttack(1)
 {
 }
 

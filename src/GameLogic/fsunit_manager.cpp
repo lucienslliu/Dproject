@@ -1,6 +1,17 @@
 #include "stdlogic.h"
 #include "fsunit_manager.h"
 
+struct UnitProp
+{
+	int nLife;
+	int nAttack;
+};
+
+UnitProp UnitProps[] = 
+{
+	{ 5, 5 },
+};
+
 FSUnitManager::FSUnitManager(void)
 {
 }
@@ -14,10 +25,13 @@ bool FSUnitManager::Init()
 	return true;
 }
 
-Ptr<FSUnit> FSUnitManager::CreateUnit()
+Ptr<FSUnit> FSUnitManager::CreateUnit(ID unitID)
 {
 	Ptr<FSUnit> unit(new FSUnit());
 	m_unitmap[unit->GetUniqueID()] = unit;
+	
+	unit->SetLife(UnitProps[unitID].nLife);
+	unit->SetAttack(UnitProps[unitID].nAttack);
 
 	return unit;
 }

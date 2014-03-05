@@ -41,6 +41,16 @@ int FSUnit::GetLife()
 	return m_PropAttr.m_nLife;
 }
 
+void FSUnit::SetAttack(int attack)
+{
+	m_PropAttr.m_nAttack = attack;
+}
+
+void FSUnit::SetLife(int life)
+{
+	m_PropAttr.m_nLife = life;
+}
+
 void FSUnit::ChangeLife(int nLife)
 {
 	m_PropAttr.m_nLife += nLife;

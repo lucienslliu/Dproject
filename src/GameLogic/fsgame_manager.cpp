@@ -45,7 +45,7 @@ void FSGameManager::HandleMessage(const Ptr<Message>& msg)
 	else if (msgID == FSAttackMsg::Id && 
 		m_stat == EGameState_Playing)
 	{
-		DoRoundAction(msg);
+		DoAttack(msg);
 	}
 	else
 	{
@@ -86,7 +86,14 @@ void FSGameManager::DoGetReady(const Ptr<Message>& msg)
 
 void FSGameManager::DoUseCard(const Ptr<Message>& msg)
 {
+	Ptr<FSUseCardMsg> useCardMsg = boost::static_pointer_cast<FSUseCardMsg>(msg);
 
+	if (m_Heros[m_CurPlayer].GetPlayerID() != useCardMsg->GetPlayerID())
+	{
+		return;
+	}
+
+	m_Heros[m_CurPlayer].UseCard(useCardMsg->cardID);
 }
 
 void FSGameManager::GameBegin()
@@ -125,7 +132,7 @@ void FSGameManager::DoChange(const Ptr<Message>& msg)
 	// 换牌 暂时不搞
 }
 
-void FSGameManager::DoRoundAction(const Ptr<Message>& msg)
+void FSGameManager::DoAttack(const Ptr<Message>& msg)
 {
 	// 回合中的操作
 	Ptr<FSAttackMsg> getReadyMsg = boost::static_pointer_cast<FSAttackMsg>(msg);

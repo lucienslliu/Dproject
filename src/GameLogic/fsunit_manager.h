@@ -18,7 +18,7 @@ public:
 	}
 
 public:
-	Ptr<FSUnit> CreateUnit();
+	Ptr<FSUnit> CreateUnit(ID unitID);
 
 	void DestroyUnit(Ptr<FSUnit> unit);
 

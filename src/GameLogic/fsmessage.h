@@ -57,6 +57,12 @@ class FSGetReadyMsg : public FSAsyncMessage
 	DeclareMsgId
 
 public:
+	FSGetReadyMsg()
+	{
+		player.profession = HERO_PROFESSION_1;
+		memset(player.cards, 0, sizeof(player.cards));
+	}
+
 	PlayerInfo player;
 };
 

@@ -20,9 +20,12 @@ public:
 	int GetAttack();
 	int GetLife();
 
+	void SetAttack(int attack);
+	void SetLife(int life);
+
 	void ChangeLife(int nLife);
 
-private:
+protected:
 	FSPropertyAttr m_PropAttr;
 	FSPropertyBuff m_PropBuff;
 	FSPropertyAbil m_PropAbil;

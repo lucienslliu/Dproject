@@ -23,10 +23,18 @@ void FSGameThread::Start()
 	m_pThread.reset(new boost::thread(boost::bind(&FSGameThread::Loop, this)));
 
 	Ptr<FSGetReadyMsg> msg(new FSGetReadyMsg());
+	msg->SetPlayerID(0);
 	FSMsgManager::Instance().SendSyncMessage(msg);
+	msg->SetPlayerID(1);
 	FSMsgManager::Instance().SendSyncMessage(msg);
 
 	Ptr<FSUseCardMsg> msg1(new FSUseCardMsg());
+	msg1->SetPlayerID(0);
+	msg1->cardID = 0; 
+	FSMsgManager::Instance().SendSyncMessage(msg1);
+
+	msg1->SetPlayerID(1);
+	msg1->cardID = 0; 
 	FSMsgManager::Instance().SendSyncMessage(msg1);
 
 	Ptr<FSAttackMsg> msg2(new FSAttackMsg());

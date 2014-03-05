@@ -1,10 +1,12 @@
 #include "stdlogic.h"
 #include "fshero.h"
+#include "fsunit_manager.h"
 
 FSHero::FSHero(void)
 : m_nPlayerID(INVALID_ID)
 {
-
+	m_PropAttr.m_nLife = 30;
+	m_PropAttr.m_nAttack = 0;
 }
 
 FSHero::~FSHero(void)
@@ -41,7 +43,8 @@ void FSHero::UseCard(CARD_ID card)
 		return;
 	}
 
-	
+	// 创建单位
+	FSUnitManager::Instance().CreateUnit(card);
 
 	m_handCards.erase(it);
 }
