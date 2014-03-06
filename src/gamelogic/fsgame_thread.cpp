@@ -22,23 +22,31 @@ void FSGameThread::Start()
 
 	m_pThread.reset(new boost::thread(boost::bind(&FSGameThread::Loop, this)));
 
+	// 准备
 	Ptr<FSGetReadyMsg> msg(new FSGetReadyMsg());
 	msg->SetPlayerID(0);
 	FSMsgManager::Instance().SendSyncMessage(msg);
 	msg->SetPlayerID(1);
 	FSMsgManager::Instance().SendSyncMessage(msg);
 
+	// 第一个人使用牌
 	Ptr<FSUseCardMsg> msg1(new FSUseCardMsg());
 	msg1->SetPlayerID(0);
 	msg1->cardID = 0; 
 	FSMsgManager::Instance().SendSyncMessage(msg1);
 
+	// 第一个人结束回合
+	Ptr<FSFinishRoundMsg> finishRound(new FSFinishRoundMsg());
+	finishRound->SetPlayerID(0);
+	FSMsgManager::Instance().SendSyncMessage(finishRound);
+
+	// 第二个人使用牌
 	msg1->SetPlayerID(1);
 	msg1->cardID = 0; 
 	FSMsgManager::Instance().SendSyncMessage(msg1);
 
-	Ptr<FSAttackMsg> msg2(new FSAttackMsg());
-	FSMsgManager::Instance().SendSyncMessage(msg2);
+	//Ptr<FSAttackMsg> msg2(new FSAttackMsg());
+	//FSMsgManager::Instance().SendSyncMessage(msg2);
 }
 
 void FSGameThread::Stop()

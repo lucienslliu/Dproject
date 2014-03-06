@@ -7,4 +7,6 @@ ImplementMsgId(FSAsyncMessage)
 
 ImplementMsgId(FSGetReadyMsg)
 ImplementMsgId(FSUseCardMsg)
+ImplementMsgId(FSUnitDeadMsg)
 ImplementMsgId(FSAttackMsg)
+ImplementMsgId(FSFinishRoundMsg)

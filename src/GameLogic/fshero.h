@@ -2,6 +2,14 @@
 
 #include "fsunit.h"
 
+#define MAX_OWNER_UNIT 6
+
+struct UnitSlot 
+{
+	bool used;
+	ID UnitID;
+};
+
 class FSHero : public FSUnit
 {
 public:
@@ -24,7 +32,12 @@ public:
 
 	void DealSpecailCard(CARD_ID card);
 
-	void UseCard(CARD_ID card);
+	void UseCard(CARD_ID card, PLAYSEQUENCE player);
+
+	void KillUnit(ID unitID);
+
+private:
+	int GetEmptySlot();
 
 private:
 	int m_nPlayerID;
@@ -35,4 +48,6 @@ private:
 
 	CARDLIST m_restCards;
 	CARDLIST m_handCards;
+
+	UnitSlot m_UnitList[MAX_OWNER_UNIT];
 };

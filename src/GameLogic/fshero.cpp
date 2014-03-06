@@ -7,6 +7,7 @@ FSHero::FSHero(void)
 {
 	m_PropAttr.m_nLife = 30;
 	m_PropAttr.m_nAttack = 0;
+	memset(m_UnitList, 0, sizeof(m_UnitList));
 }
 
 FSHero::~FSHero(void)
@@ -35,8 +36,14 @@ void FSHero::DealSpecailCard(CARD_ID card)
 	m_handCards.push_back(card);
 }
 
-void FSHero::UseCard(CARD_ID card)
+void FSHero::UseCard(CARD_ID card, PLAYSEQUENCE player)
 {
+	int nSlot = GetEmptySlot();
+	if (INVALID_INDEX == nSlot)
+	{
+		return;
+	}
+
 	CARDLIST::iterator it = std::find(m_handCards.begin(), m_handCards.end(), card);
 	if (it == m_handCards.end())
 	{
@@ -44,9 +51,39 @@ void FSHero::UseCard(CARD_ID card)
 	}
 
 	// 创建单位
-	FSUnitManager::Instance().CreateUnit(card);
+	Ptr<FSUnit> pUnit = FSUnitManager::Instance().CreateUnit(card);
+	if (pUnit)
+	{
+		pUnit->SetPlayer(player);
+		m_UnitList[nSlot].UnitID = pUnit->GetUniqueID();
+		m_UnitList[nSlot].used = false;
+	}
 
 	m_handCards.erase(it);
+}
+
+void FSHero::KillUnit(ID unitID)
+{
+	for (int i = 0; i < MAX_OWNER_UNIT; i++)
+	{
+		if (true == m_UnitList[i].used && m_UnitList[i].UnitID == unitID)
+		{
+			m_UnitList[i].used = false;
+			return;
+		}		
+	}
+}
+
+int FSHero::GetEmptySlot()
+{
+	for (int i = 0; i < MAX_OWNER_UNIT; i++)
+	{
+		if (false == m_UnitList[i].used)
+		{
+			return i;
+		}
+	}
+	return INVALID_INDEX;
 }
 
 void FSHero::DealOneCard()

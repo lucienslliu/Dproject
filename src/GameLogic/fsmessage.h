@@ -86,7 +86,18 @@ public:
 
 };
 
-class FSRoundEndMsg : public FSAsyncMessage
+class FSUnitDeadMsg : public FSAsyncMessage
+{
+	DeclareMsgId
+
+public:
+	PLAYSEQUENCE player;
+	ID attackerID;
+	ID victimID;
+
+};
+
+class FSFinishRoundMsg : public FSAsyncMessage
 {
 	DeclareMsgId
 

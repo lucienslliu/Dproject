@@ -29,7 +29,8 @@ private:
 	void DoUseCard(const Ptr<Message>& msg);
 	void DoChange(const Ptr<Message>& msg);
 	void DoAttack(const Ptr<Message>& msg);
-	void DoFinishAction(const Ptr<Message>& msg);
+	void DoUnitDead(const Ptr<Message>& msg);
+	void DoFinishRound(const Ptr<Message>& msg);
 	void DoSurrander(const Ptr<Message>& msg);
 
 private:

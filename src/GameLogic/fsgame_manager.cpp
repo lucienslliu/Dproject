@@ -16,6 +16,8 @@ void FSGameManager::Initialize()
 	RegisterMessage(FSGetReadyMsg::Id);
 	RegisterMessage(FSUseCardMsg::Id);
 	RegisterMessage(FSAttackMsg::Id);
+	RegisterMessage(FSUnitDeadMsg::Id);
+	RegisterMessage(FSFinishRoundMsg::Id);
 
 	FSUnitManager::Instance().Init();
 
@@ -32,20 +34,28 @@ void FSGameManager::HandleMessage(const Ptr<Message>& msg)
 	}
 	
 	ID msgID = msg->GetId();
-	if (msgID == FSGetReadyMsg::Id && 
-		m_stat == EGameState_WaitPlayer)
+	if (m_stat == EGameState_WaitPlayer && msgID == FSGetReadyMsg::Id)
 	{
 		DoGetReady(msg);
 	}
-	else if (msgID == FSUseCardMsg::Id && 
-		m_stat == EGameState_Playing)
+	else if (m_stat == EGameState_Playing)
 	{
-		DoUseCard(msg);
-	}
-	else if (msgID == FSAttackMsg::Id && 
-		m_stat == EGameState_Playing)
-	{
-		DoAttack(msg);
+		if (msgID == FSUseCardMsg::Id)
+		{
+			DoUseCard(msg);
+		}
+		else if (msgID == FSAttackMsg::Id)
+		{
+			DoAttack(msg);
+		}
+		else if (msgID == FSUnitDeadMsg::Id)
+		{
+			DoUnitDead(msg);
+		}
+		else if (msgID == FSFinishRoundMsg::Id)
+		{
+			DoFinishRound(msg);
+		}
 	}
 	else
 	{
@@ -81,7 +91,7 @@ void FSGameManager::DoGetReady(const Ptr<Message>& msg)
 	if (m_stat == EGameState_Playing)
 	{
 		GameBegin();
-	}	
+	}
 }
 
 void FSGameManager::DoUseCard(const Ptr<Message>& msg)
@@ -93,7 +103,7 @@ void FSGameManager::DoUseCard(const Ptr<Message>& msg)
 		return;
 	}
 
-	m_Heros[m_CurPlayer].UseCard(useCardMsg->cardID);
+	m_Heros[m_CurPlayer].UseCard(useCardMsg->cardID, m_CurPlayer);
 }
 
 void FSGameManager::GameBegin()
@@ -130,6 +140,7 @@ PLAYSEQUENCE FSGameManager::GetOtherPlayer()
 void FSGameManager::DoChange(const Ptr<Message>& msg)
 {
 	// 换牌 暂时不搞
+	msg;
 }
 
 void FSGameManager::DoAttack(const Ptr<Message>& msg)
@@ -150,8 +161,22 @@ void FSGameManager::DoAttack(const Ptr<Message>& msg)
 
 }
 
-void FSGameManager::DoFinishAction(const Ptr<Message>& msg)
+void FSGameManager::DoUnitDead(const Ptr<Message>& msg)
 {
+	// 单位死亡
+	Ptr<FSUnitDeadMsg> UnitDeadMsg = boost::static_pointer_cast<FSUnitDeadMsg>(msg);
+	m_Heros[UnitDeadMsg->player].KillUnit(UnitDeadMsg->victimID);
+	FSUnitManager::Instance().DestroyUnit(UnitDeadMsg->victimID);
+}
+
+void FSGameManager::DoFinishRound(const Ptr<Message>& msg)
+{
+	Ptr<FSFinishRoundMsg> finishRoundMsg = boost::static_pointer_cast<FSFinishRoundMsg>(msg);
+	if (finishRoundMsg->GetPlayerID() != m_Heros[m_CurPlayer].GetPlayerID())
+	{
+		return;
+	}
+
 	// 回合结束事件
 	SendRoundEndEvent();
 
@@ -164,7 +189,7 @@ void FSGameManager::DoFinishAction(const Ptr<Message>& msg)
 
 void FSGameManager::DoSurrander(const Ptr<Message>& msg)
 {
-
+	msg;
 }
 
 void FSGameManager::SendRoundBeginEvent()

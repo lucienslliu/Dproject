@@ -13,6 +13,7 @@ public:
 	virtual ~FSUnit(void);
 
 public:
+	void SetPlayer(PLAYSEQUENCE player);
 	void Update();
 
 	void Attack(Ptr<FSUnit> pVictim);
@@ -30,4 +31,5 @@ protected:
 	FSPropertyBuff m_PropBuff;
 	FSPropertyAbil m_PropAbil;
 
+	PLAYSEQUENCE m_Player;
 };

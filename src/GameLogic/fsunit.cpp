@@ -1,5 +1,6 @@
 #include "stdlogic.h"
 #include "fsunit.h"
+#include "fsmsg_manager.h"
 #include "fsunit_manager.h"
 
 FSUnit::FSUnit(void)
@@ -8,6 +9,11 @@ FSUnit::FSUnit(void)
 
 FSUnit::~FSUnit(void)
 {
+}
+
+void FSUnit::SetPlayer(PLAYSEQUENCE player)
+{
+	m_Player = player; 
 }
 
 void FSUnit::Update(void)
@@ -27,8 +33,24 @@ void FSUnit::Attack(Ptr<FSUnit> pVictim)
 	this->ChangeLife(-attack2);
 	pVictim->ChangeLife(-attack1);
 
-	FSUnitManager::Instance().UpdateDeadUnit(pVictim);
-	FSUnitManager::Instance().UpdateDeadUnit(Ptr<FSUnit>(this));
+	if (this->GetLife() <= 0)
+	{
+		Ptr<FSUnitDeadMsg> msg(new FSUnitDeadMsg());
+		msg->player = m_Player;
+		msg->attackerID = this->GetUniqueID(); 
+		msg->victimID = pVictim->GetUniqueID();
+		FSMsgManager::Instance().SendSyncMessage(msg);
+	}
+
+	if (pVictim->GetLife() <= 0)
+	{
+		Ptr<FSUnitDeadMsg> msg(new FSUnitDeadMsg());
+		msg->player = m_Player;
+		msg->attackerID = pVictim->GetUniqueID(); 
+		msg->victimID = this->GetUniqueID();
+		FSMsgManager::Instance().SendSyncMessage(msg);
+	}
+
 }
 
 int FSUnit::GetAttack()

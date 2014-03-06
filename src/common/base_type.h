@@ -28,9 +28,8 @@ enum EMessageType
 	EM_FSAsyncMessage = EM_MessageBegin,
 	EM_FSGetReadyMsg = EM_MessageBegin,
 	EM_FSUseCardMsg,
+	EM_FSUnitDeadMsg,
 	EM_FSAttackMsg,
-	EM_ReqRoundAction,
-	EM_ReqFinishAction,
-	EM_ReqSurrander,
+	EM_FSFinishRoundMsg,
 };
 
