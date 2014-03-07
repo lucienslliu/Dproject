@@ -2,6 +2,7 @@
 #include "fsunit.h"
 #include "fsmsg_manager.h"
 #include "fsunit_manager.h"
+#include "fsgame_manager.h"
 
 FSUnit::FSUnit(void)
 {
@@ -33,19 +34,17 @@ void FSUnit::Attack(Ptr<FSUnit> pVictim)
 	this->ChangeLife(-attack2);
 	pVictim->ChangeLife(-attack1);
 
-	if (this->GetLife() <= 0)
+	if (pVictim->GetLife() <= 0)
 	{
 		Ptr<FSUnitDeadMsg> msg(new FSUnitDeadMsg());
-		msg->player = m_Player;
 		msg->attackerID = this->GetUniqueID(); 
 		msg->victimID = pVictim->GetUniqueID();
 		FSMsgManager::Instance().SendSyncMessage(msg);
 	}
 
-	if (pVictim->GetLife() <= 0)
+	if (this->GetLife() <= 0)
 	{
 		Ptr<FSUnitDeadMsg> msg(new FSUnitDeadMsg());
-		msg->player = m_Player;
 		msg->attackerID = pVictim->GetUniqueID(); 
 		msg->victimID = this->GetUniqueID();
 		FSMsgManager::Instance().SendSyncMessage(msg);

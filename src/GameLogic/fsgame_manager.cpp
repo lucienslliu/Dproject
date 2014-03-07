@@ -146,27 +146,42 @@ void FSGameManager::DoChange(const Ptr<Message>& msg)
 void FSGameManager::DoAttack(const Ptr<Message>& msg)
 {
 	// 回合中的操作
-	Ptr<FSAttackMsg> getReadyMsg = boost::static_pointer_cast<FSAttackMsg>(msg);
+	Ptr<FSAttackMsg> attackMsg = boost::static_pointer_cast<FSAttackMsg>(msg);
+	Ptr<FSUnit> pAttacker = FSUnitManager::Instance().FindUnit(attackMsg->attackerID);
+	Ptr<FSUnit> pVictim = FSUnitManager::Instance().FindUnit(attackMsg->victimID);
 
-	Ptr<FSUnit> pAttacker = FSUnitManager::Instance().FindUnit(getReadyMsg->attackerID);
-	Ptr<FSUnit> pVictim = FSUnitManager::Instance().FindUnit(getReadyMsg->victimID);
 
-	if (!pAttacker || !pVictim)
+	if (!pAttacker || !pVictim || (pAttacker == pVictim))
+	{
+		return;
+	}
+
+	if (attackMsg->GetPlayerID() != m_Heros[m_CurPlayer].GetPlayerID())
+	{
+		return;
+	}
+
+	if (m_CurPlayer != pAttacker->GetPlayer())
 	{
 		return;
 	}
 
 	// 攻击
 	pAttacker->Attack(pVictim);
-
 }
 
 void FSGameManager::DoUnitDead(const Ptr<Message>& msg)
 {
 	// 单位死亡
 	Ptr<FSUnitDeadMsg> UnitDeadMsg = boost::static_pointer_cast<FSUnitDeadMsg>(msg);
-	m_Heros[UnitDeadMsg->player].KillUnit(UnitDeadMsg->victimID);
-	FSUnitManager::Instance().DestroyUnit(UnitDeadMsg->victimID);
+
+	Ptr<FSUnit> pVictim = FSUnitManager::Instance().FindUnit(UnitDeadMsg->victimID);
+	if (!pVictim)
+	{
+		return;
+	}
+	m_Heros[pVictim->GetPlayer()].KillUnit(UnitDeadMsg->victimID);
+	FSUnitManager::Instance().DestroyUnit(pVictim);
 }
 
 void FSGameManager::DoFinishRound(const Ptr<Message>& msg)

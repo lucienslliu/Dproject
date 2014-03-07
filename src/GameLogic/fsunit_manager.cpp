@@ -13,6 +13,7 @@ UnitProp UnitProps[] =
 };
 
 FSUnitManager::FSUnitManager(void)
+: m_IDGenerator(1)
 {
 }
 
@@ -28,10 +29,12 @@ bool FSUnitManager::Init()
 Ptr<FSUnit> FSUnitManager::CreateUnit(ID unitID)
 {
 	Ptr<FSUnit> unit(new FSUnit());
-	m_unitmap[unit->GetUniqueID()] = unit;
-	
 	unit->SetLife(UnitProps[unitID].nLife);
 	unit->SetAttack(UnitProps[unitID].nAttack);
+
+	unit->SetUniqueID(m_IDGenerator++);
+
+	m_unitmap[unit->GetUniqueID()] = unit;
 
 	return unit;
 }

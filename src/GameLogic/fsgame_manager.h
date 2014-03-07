@@ -40,6 +40,7 @@ private:
 
 	PLAYSEQUENCE GetOtherPlayer();
 
+
 private:
 	// ·¢ËÍÊÂ¼ş
 	void SendRoundBeginEvent();

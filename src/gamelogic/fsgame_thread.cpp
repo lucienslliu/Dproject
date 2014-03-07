@@ -45,8 +45,17 @@ void FSGameThread::Start()
 	msg1->cardID = 0; 
 	FSMsgManager::Instance().SendSyncMessage(msg1);
 
-	//Ptr<FSAttackMsg> msg2(new FSAttackMsg());
-	//FSMsgManager::Instance().SendSyncMessage(msg2);
+	// 第二个人结束回合
+	finishRound.reset(new FSFinishRoundMsg());
+	finishRound->SetPlayerID(1);
+	FSMsgManager::Instance().SendSyncMessage(finishRound);
+
+	// 第一个玩家发起攻击
+	Ptr<FSAttackMsg> attackMsg(new FSAttackMsg());
+	attackMsg->SetPlayerID(0);
+	attackMsg->attackerID = 1;
+	attackMsg->victimID = 2;
+	FSMsgManager::Instance().SendSyncMessage(attackMsg);
 }
 
 void FSGameThread::Stop()

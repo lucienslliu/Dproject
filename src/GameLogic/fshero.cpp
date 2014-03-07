@@ -56,7 +56,7 @@ void FSHero::UseCard(CARD_ID card, PLAYSEQUENCE player)
 	{
 		pUnit->SetPlayer(player);
 		m_UnitList[nSlot].UnitID = pUnit->GetUniqueID();
-		m_UnitList[nSlot].used = false;
+		m_UnitList[nSlot].used = true;
 	}
 
 	m_handCards.erase(it);
@@ -69,6 +69,7 @@ void FSHero::KillUnit(ID unitID)
 		if (true == m_UnitList[i].used && m_UnitList[i].UnitID == unitID)
 		{
 			m_UnitList[i].used = false;
+			m_UnitList[i].UnitID = 0;
 			return;
 		}		
 	}

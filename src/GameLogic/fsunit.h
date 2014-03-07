@@ -14,6 +14,8 @@ public:
 
 public:
 	void SetPlayer(PLAYSEQUENCE player);
+	PLAYSEQUENCE GetPlayer() { return m_Player; }
+
 	void Update();
 
 	void Attack(Ptr<FSUnit> pVictim);

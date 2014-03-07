@@ -33,4 +33,6 @@ public:
 private:
 	typedef std::map<ID, Ptr<FSUnit> > UNITMAP;
 	UNITMAP m_unitmap;
+
+	int m_IDGenerator;
 };

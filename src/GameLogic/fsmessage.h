@@ -91,7 +91,6 @@ class FSUnitDeadMsg : public FSAsyncMessage
 	DeclareMsgId
 
 public:
-	PLAYSEQUENCE player;
 	ID attackerID;
 	ID victimID;
 
