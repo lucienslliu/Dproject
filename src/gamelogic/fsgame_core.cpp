@@ -22,14 +22,13 @@ bool FSGameCore::UnInit()
 	return true;
 }
 
-void FSGameCore::SendMessage(Message* msg)
+void FSGameCore::SendMessage(Ptr<Message> msg)
 {
-	Ptr<Message> pMsg(msg);
-	FSMsgManager::Instance().SendAsyncMessage(pMsg);
+	FSMsgManager::Instance().SendAsyncMessage(msg);
 }
 
 IGameCore* CreateGameCore()
 {
-	IGameCore* pCore = new FSGameCore();
+	FSGameCore* pCore = new FSGameCore();
 	return pCore;
 }

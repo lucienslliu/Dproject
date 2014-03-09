@@ -25,11 +25,13 @@ void FSMsgManager::SendMessage(Message* msg)
 
 void FSMsgManager::SendSyncMessage(Ptr<Message> msg)
 {
-	Ptr<Message> m(msg);
-	Dispatcher::HandleMessage(m);
+	Dispatcher::HandleMessage(msg);
 }
 
 void FSMsgManager::SendAsyncMessage(Ptr<Message> msg)
 {
-	m_MsgList.push_back(msg);
+	// 异步消息处理
+	// 先按同步来
+	//m_MsgList.push_back(msg);
+	Dispatcher::HandleMessage(msg);
 }

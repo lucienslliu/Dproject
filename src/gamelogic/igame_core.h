@@ -9,7 +9,7 @@ public:
 
 	virtual bool UnInit() = 0;
 
-	virtual void SendMessage(Message* msg) = 0;
+	virtual void SendMessage(Ptr<Message> msg) = 0;
 
 };
 #ifdef __cplusplus

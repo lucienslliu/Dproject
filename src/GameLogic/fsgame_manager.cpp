@@ -18,6 +18,7 @@ void FSGameManager::Initialize()
 	RegisterMessage(FSAttackMsg::Id);
 	RegisterMessage(FSUnitDeadMsg::Id);
 	RegisterMessage(FSFinishRoundMsg::Id);
+	RegisterMessage(FSSurranderMsg::Id);
 
 	FSUnitManager::Instance().Init();
 

@@ -14,7 +14,7 @@ public:
 
 	virtual bool UnInit();
 
-	virtual void SendMessage(Message* msg);
+	virtual void SendMessage(Ptr<Message> msg);
 
 private:
 	FSGameThread m_GT;

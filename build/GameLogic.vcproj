@@ -282,14 +282,6 @@
 			Name="Message"
 			>
 			<File
-				RelativePath="..\src\gamelogic\fsmessage.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\GameLogic\fsmessage.h"
-				>
-			</File>
-			<File
 				RelativePath="..\src\gamelogic\fsmsg_manager.cpp"
 				>
 			</File>
