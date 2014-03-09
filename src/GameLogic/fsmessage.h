@@ -99,63 +99,9 @@ public:
 class FSFinishRoundMsg : public FSAsyncMessage
 {
 	DeclareMsgId
-
-private:
 };
 
-/*
-enum l2d_Message
+class FSSurranderMsg : public FSAsyncMessage
 {
-	l2d_Begin,
-	l2d_GameStart = l2d_Begin,
-	l2d_DoChange,
-	l2d_DoAction,
-	l2d_GameEnd,
+	DeclareMsgId
 };
-struct dMessage : public Message
-{
-	d2l_Message msgType;
-};
-
-
-struct dGetReadyMsg : public dMessage
-{
-	PlayerInfo player[PLAYSEQUENCE_COUNT];
-
-	dGetReadyMsg::dGetReadyMsg()
-	{
-		msgType = d2l_GetReady;
-	}
-};
-
-struct dRoundActionMsg : public dMessage
-{
-	dRoundActionMsg::dRoundActionMsg()
-	{
-		msgType = d2l_ReqRoundAction;
-	}
-};
-
-struct dFinishActionMsg : public dMessage
-{
-	dFinishActionMsg::dFinishActionMsg()
-	{
-		msgType = d2l_ReqFinishAction;
-	}
-};
-
-
-struct dSurranderMsg : public dMessage
-{
-	dSurranderMsg::dSurranderMsg()
-	{
-		msgType = d2l_ReqSurrander;
-	}
-};
-
-//-----------------------------------------------------
-struct lMessage : public Message
-{
-	l2d_Message msgType;
-};
-*/

@@ -204,7 +204,10 @@ void FSGameManager::DoFinishRound(const Ptr<Message>& msg)
 
 void FSGameManager::DoSurrander(const Ptr<Message>& msg)
 {
-	msg;
+	Ptr<FSSurranderMsg> surranderMsg = boost::static_pointer_cast<FSSurranderMsg>(msg);
+
+	// Ò»·½Í¶½µ
+	GameOver(surranderMsg->GetPlayerID());
 }
 
 void FSGameManager::SendRoundBeginEvent()
@@ -215,4 +218,9 @@ void FSGameManager::SendRoundBeginEvent()
 void FSGameManager::SendRoundEndEvent()
 {
 
+}
+
+void FSGameManager::GameOver(ID loser)
+{
+	loser;
 }

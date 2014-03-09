@@ -31,5 +31,6 @@ enum EMessageType
 	EM_FSUnitDeadMsg,
 	EM_FSAttackMsg,
 	EM_FSFinishRoundMsg,
+	EM_FSSurranderMsg,
 };
 

@@ -40,6 +40,7 @@ private:
 
 	PLAYSEQUENCE GetOtherPlayer();
 
+	void GameOver(ID loser);
 
 private:
 	// ·¢ËÍÊÂ¼ş
