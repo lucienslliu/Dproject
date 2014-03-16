@@ -1,6 +1,7 @@
 #include "stdlogic.h"
 #include "fshero.h"
 #include "fsunit_manager.h"
+#include "fscard.h"
 
 FSHero::FSHero(void)
 : m_nPlayerID(INVALID_ID)
@@ -38,18 +39,24 @@ void FSHero::DealSpecailCard(CARD_ID card)
 	m_handCards.push_back(card);
 }
 
-void FSHero::UseCard(CARD_ID card, PLAYSEQUENCE player)
+bool FSHero::UseCard(CARD_ID card, PLAYSEQUENCE player)
 {
+	int nCost = FSCard::GetCardCost(card);
+	if (nCost > m_nCurCrystle)
+	{
+		return false;
+	}
+
 	int nSlot = GetEmptySlot();
 	if (INVALID_INDEX == nSlot)
 	{
-		return;
+		return false;
 	}
 
 	CARDLIST::iterator it = std::find(m_handCards.begin(), m_handCards.end(), card);
 	if (it == m_handCards.end())
 	{
-		return;
+		return false;
 	}
 
 	// 创建单位
@@ -60,8 +67,15 @@ void FSHero::UseCard(CARD_ID card, PLAYSEQUENCE player)
 		m_UnitList[nSlot].UnitID = pUnit->GetUniqueID();
 		m_UnitList[nSlot].used = true;
 	}
+	else
+	{
+		return false;
+	}
 
 	m_handCards.erase(it);
+	m_nCurCrystle -= nCost;
+
+	return true;
 }
 
 void FSHero::KillUnit(ID unitID)

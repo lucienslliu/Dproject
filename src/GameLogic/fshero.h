@@ -4,7 +4,7 @@
 
 #define MAX_OWNER_UNIT 6
 
-struct UnitSlot 
+struct UnitSlot
 {
 	bool used;
 	ID UnitID;
@@ -32,7 +32,7 @@ public:
 
 	void DealSpecailCard(CARD_ID card);
 
-	void UseCard(CARD_ID card, PLAYSEQUENCE player);
+	bool UseCard(CARD_ID card, PLAYSEQUENCE player);
 
 	void KillUnit(ID unitID);
 
