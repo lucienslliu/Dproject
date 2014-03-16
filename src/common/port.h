@@ -15,7 +15,7 @@ public:
 	/// send a message to the port
 	//virtual void Send(const Ptr<iMessage>& msg);
 	/// get the array of accepted messages (sorted)
-	const std::vector<const ID*>& GetAcceptedMessages() const;    
+	const std::vector<ID>& GetAcceptedMessages() const;    
 	/// return true if port accepts this msg
 	bool AcceptsMessage(const ID& msgId) const;
 	/// handle a single accepted message
@@ -26,7 +26,7 @@ protected:
 	void RegisterMessage(const ID& msgId);
 
 private:
-	std::vector<const ID*> acceptedMessageIds;
+	std::vector<ID> acceptedMessageIds;
 };
 
 //------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ Port::RegisterMessage(const ID& msgId)
 	// process the same messages)
 	if (true == AcceptsMessage(msgId))
 	{
-		this->acceptedMessageIds.push_back(&msgId);
+		this->acceptedMessageIds.push_back(msgId);
 	}
 }
 
@@ -48,7 +48,7 @@ Port::RegisterMessage(const ID& msgId)
 /**
 */
 inline
-const std::vector<const ID*>&
+const std::vector<ID>&
 Port::GetAcceptedMessages() const
 {
 	return this->acceptedMessageIds;
@@ -62,5 +62,5 @@ bool
 Port::AcceptsMessage(const ID& msgId) const
 {
 	return (this->acceptedMessageIds.end() == std::find(
-		this->acceptedMessageIds.begin(), this->acceptedMessageIds.end(), &msgId));
+		this->acceptedMessageIds.begin(), this->acceptedMessageIds.end(), msgId));
 }

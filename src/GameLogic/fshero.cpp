@@ -4,6 +4,8 @@
 
 FSHero::FSHero(void)
 : m_nPlayerID(INVALID_ID)
+, m_nMaxCrystle(1)
+, m_nCurCrystle(1)
 {
 	m_PropAttr.m_nLife = 30;
 	m_PropAttr.m_nAttack = 0;
@@ -73,6 +75,12 @@ void FSHero::KillUnit(ID unitID)
 			return;
 		}		
 	}
+}
+
+void FSHero::FillCrystle()
+{
+	m_nMaxCrystle++;
+	m_nCurCrystle = m_nMaxCrystle;
 }
 
 int FSHero::GetEmptySlot()

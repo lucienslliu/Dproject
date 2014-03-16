@@ -198,6 +198,7 @@ void FSGameManager::DoFinishRound(const Ptr<Message>& msg)
 
 	m_CurPlayer = GetOtherPlayer();
 	m_Heros[m_CurPlayer].DealOneCard();
+	m_Heros[m_CurPlayer].FillCrystle();
 
 	// 回合开始事件
 	SendRoundBeginEvent();

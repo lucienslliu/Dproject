@@ -45,5 +45,5 @@ public:
 private:
     std::vector<Ptr<Port> > portArray;
     std::vector<std::vector<Ptr<Port> > > idPorts;      // one entry per message, contains ports which accepts the message
-	std::map<const ID*, int> idPortMap;				// maps message id's to indices in the msgIdPorts array
+	std::map<ID, int> idPortMap;						// maps message id's to indices in the msgIdPorts array
 };

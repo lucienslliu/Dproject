@@ -31,19 +31,19 @@ Dispatcher::AttachPort(const Ptr<Port>& port)
 
     // get the array of accepted messages from the port, and add each message
     // to our own accepted messages, and create a mapping of message ids to ports
-	const std::vector<const ID*>& idArray = port->GetAcceptedMessages();
+	const std::vector<ID>& idArray = port->GetAcceptedMessages();
     for (unsigned i = 0; i < idArray.size(); i++)
     {
-        const ID* msgIdPtr = idArray[i];
-        this->RegisterMessage(*msgIdPtr);
-        if (this->idPortMap.end() == this->idPortMap.find(msgIdPtr))
+        ID msgId = idArray[i];
+        this->RegisterMessage(msgId);
+        if (this->idPortMap.end() == this->idPortMap.find(msgId))
         {
             // need to add a new empty entry
             std::vector<Ptr<Port> > emptyArray;
             this->idPorts.push_back(emptyArray);
-			this->idPortMap.insert(std::make_pair(msgIdPtr, this->idPorts.size() - 1));
+			this->idPortMap.insert(std::make_pair(msgId, this->idPorts.size() - 1));
         }
-        this->idPorts[this->idPortMap[msgIdPtr]].push_back(port);
+        this->idPorts[this->idPortMap[msgId]].push_back(port);
     }
 }
 
@@ -60,13 +60,13 @@ Dispatcher::RemovePort(const Ptr<Port>& port)
     ASSERT(this->HasPort(port));
 
     // remove the port from the id/port map
-    const std::vector<const ID*>& idArray = port->GetAcceptedMessages();
+    const std::vector<ID>& idArray = port->GetAcceptedMessages();
     for (unsigned i = 0; i < idArray.size(); i++)
     {
-        const ID* msgIdPtr = idArray[i];
-        if (this->idPortMap.end() != this->idPortMap.find(msgIdPtr))
+        ID msgId = idArray[i];
+        if (this->idPortMap.end() != this->idPortMap.find(msgId))
         {            
-            std::vector<Ptr<Port> >& ports = this->idPorts[this->idPortMap[msgIdPtr]];
+            std::vector<Ptr<Port> >& ports = this->idPorts[this->idPortMap[msgId]];
 			std::vector<Ptr<Port> >::iterator it = std::find(ports.begin(), ports.end(), port);
             ASSERT(ports.end() != it);
             ports.erase(it);
@@ -102,8 +102,8 @@ Dispatcher::HasPort(const Ptr<Port>& port) const
 void
 Dispatcher::HandleMessage(const Ptr<Message>& msg)
 {
-    const ID* msgIdPtr = &(msg->GetId());
-	std::map<const ID*, int>::iterator it = this->idPortMap.find(msgIdPtr);
+    ID msgId = msg->GetId();
+	std::map<ID, int>::iterator it = this->idPortMap.find(msgId);
     if (this->idPortMap.end() != it)
     {
         const std::vector<Ptr<Port> >& portArray = this->idPorts[it->second];

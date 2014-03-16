@@ -23,11 +23,11 @@ void FSGameThread::Start()
 	m_pThread.reset(new boost::thread(boost::bind(&FSGameThread::Loop, this)));
 
 	// 准备
- 	Ptr<FSGetReadyMsg> msg(new FSGetReadyMsg());
- 	msg->SetPlayerID(0);
- 	FSMsgManager::Instance().SendSyncMessage(msg);
- 	msg->SetPlayerID(1);
- 	FSMsgManager::Instance().SendSyncMessage(msg);
+//  	Ptr<FSGetReadyMsg> msg(new FSGetReadyMsg());
+//  	msg->SetPlayerID(0);
+//  	FSMsgManager::Instance().SendSyncMessage(msg);
+//  	msg->SetPlayerID(1);
+//  	FSMsgManager::Instance().SendSyncMessage(msg);
 // 
 // 	// 第一个人使用牌
 // 	Ptr<FSUseCardMsg> msg1(new FSUseCardMsg());

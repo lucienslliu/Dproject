@@ -36,6 +36,8 @@ public:
 
 	void KillUnit(ID unitID);
 
+	void FillCrystle();
+
 private:
 	int GetEmptySlot();
 
@@ -50,4 +52,7 @@ private:
 	CARDLIST m_handCards;
 
 	UnitSlot m_UnitList[MAX_OWNER_UNIT];
+
+	int m_nMaxCrystle;
+	int m_nCurCrystle;
 };
