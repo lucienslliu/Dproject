@@ -18,6 +18,7 @@ void FSGameThread::Start()
 {
 	Log::Instance().Init("fsgamelogic.log");
 	Log::Instance().Print("FSGameThread Start!");
+
 	FSMsgManager::Instance().Init();
 
 	m_pThread.reset(new boost::thread(boost::bind(&FSGameThread::Loop, this)));
@@ -76,6 +77,8 @@ void FSGameThread::Loop()
 
 			// 这里也是中断点
 			boost::this_thread::sleep(boost::posix_time::seconds(1));
+
+			FSMsgManager::Instance().Tick();
 		}
 
 		Log::Instance().Print("Logic thread End!");

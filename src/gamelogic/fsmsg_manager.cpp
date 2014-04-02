@@ -32,6 +32,15 @@ void FSMsgManager::SendAsyncMessage(Ptr<Message> msg)
 {
 	// 异步消息处理
 	// 先按同步来
-	//m_MsgList.push_back(msg);
-	Dispatcher::HandleMessage(msg);
+	m_MsgRB.Push(msg);
+}
+
+void FSMsgManager::Tick()
+{
+	Ptr<Message> msg = m_MsgRB.Pop();
+	while (msg != NULL)
+	{
+		SendSyncMessage(msg);
+		msg = m_MsgRB.Pop();
+	}
 }

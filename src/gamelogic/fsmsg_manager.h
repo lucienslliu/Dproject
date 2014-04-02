@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ringbuffer.h"
 #include "dispatcher.h"
 #include "fsmessage.h"
 #include "fsgame_manager.h"
@@ -25,9 +26,10 @@ public:
 
 	void SendAsyncMessage(Ptr<Message> msg);
 
+	void Tick();
+
 private:
 	Ptr<FSGameManager> m_GameManager;
 
-	typedef std::vector<Ptr<Message> > MESSAGELIST;
-	MESSAGELIST m_MsgList;
+	MsgRingBuffer m_MsgRB;
 };
